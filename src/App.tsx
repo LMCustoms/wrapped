@@ -1,14 +1,24 @@
+import { useMailStore } from "./store/mailStore";
+import { LoginScreen } from "./components/Login/LoginScreen";
 import { FolderList } from "./components/Sidebar/FolderList";
 import { MessageList } from "./components/MessageList/MessageList";
 import { MessageDetail } from "./components/MessageDetail/MessageDetail";
 
 export function App() {
+  const session = useMailStore((s) => s.session);
+
+  if (!session) {
+    return <LoginScreen />;
+  }
+
   return (
     <div className="flex h-full w-full overflow-hidden bg-surface text-gray-100">
       {/* Sidebar — folder list */}
       <aside className="w-56 flex-shrink-0 border-r border-white/10 bg-surface flex flex-col">
-        {/* Traffic light / drag region */}
-        <div className="h-10 flex items-center px-4" style={{ WebkitAppRegion: "drag" } as React.CSSProperties} />
+        <div
+          className="h-10 flex items-center px-4"
+          style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
+        />
         <FolderList />
       </aside>
 
