@@ -1,0 +1,96 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Detect language and run linter
+        run: |
+          if [ -f "package.json" ]; then
+            npm install
+            npm run lint || echo "No lint script found"
+          elif [ -f "Cargo.toml" ]; then
+            cargo fmt --check
+            cargo clippy
+          elif [ -f "pyproject.toml" ] || [ -f "setup.py" ]; then
+            pip install ruff black
+            ruff check .
+            black --check .
+          else
+            echo "No known project structure found"
+          fi
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run tests
+        run: |
+          if [ -f "package.json" ]; then
+            npm install
+            npm test || echo "No test script found"
+          elif [ -f "Cargo.toml" ]; then
+            cargo test
+          elif [ -f "pyproject.toml" ] || [ -f "setup.py" ]; then
+            pip install pytest
+            pytest || echo "No tests found"
+          else
+            echo "No known project structure found"
+          fi
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build project
+        run: |
+          if [ -f "package.json" ]; then
+            npm install
+            npm run build || echo "No build script found"
+          elif [ -f "Cargo.toml" ]; then
+            cargo build --release
+          elif [ -f "pyproject.toml" ]; then
+            pip install build
+            python -m build
+          else
+            echo "No known project structure found"
+          fi
+
+  notify:
+    name: Notify Results
+    runs-on: ubuntu-latest
+    needs: [lint, test, build]
+    if: always()
+    steps:
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "CI Pipeline ${{ job.status }} - ${{ github.repository }}"
+          to: alert@lmcustoms.cc
+          from: GitHub Actions <noreply@lmcustoms.cc>
+          body: |
+            Repository: ${{ github.repository }}
+            Workflow: ${{ github.workflow }}
+            Status: ${{ job.status }}
+            Commit: ${{ github.sha }}
+            Author: ${{ github.actor }}
+            Branch: ${{ github.ref_name }}
+            
+            View details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
