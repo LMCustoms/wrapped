@@ -14,7 +14,7 @@ export function saveCredentials(serverUrl: string, credentials: Credentials): vo
 }
 
 export function loadSavedServerUrl(): string {
-  return sessionStorage.getItem(SERVER_URL_KEY) ?? "https://mail.lmcustoms.cc";
+  return sessionStorage.getItem(SERVER_URL_KEY) ?? "";
 }
 
 export function loadSavedUsername(): string {

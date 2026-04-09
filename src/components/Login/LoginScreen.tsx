@@ -3,7 +3,7 @@ import { initSession } from "../../services/jmap/client";
 import { useMailStore } from "../../store/mailStore";
 
 export function LoginScreen() {
-  const [serverUrl, setServerUrl] = useState("https://mail.lmcustoms.cc");
+  const [serverUrl, setServerUrl] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +52,8 @@ export function LoginScreen() {
               type="url"
               value={serverUrl}
               onChange={(e) => setServerUrl(e.target.value)}
-              className="w-full bg-surface-raised border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 outline-none focus:border-accent transition-colors"
+              placeholder="https://mail.example.com"
+              className="w-full bg-surface-raised border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 outline-none focus:border-accent transition-colors placeholder-gray-600"
               required
             />
           </div>
@@ -65,7 +66,7 @@ export function LoginScreen() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="anian@lmcustoms.cc"
+              placeholder="user@example.com"
               autoComplete="username"
               className="w-full bg-surface-raised border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 outline-none focus:border-accent transition-colors placeholder-gray-600"
               required
