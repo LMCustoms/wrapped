@@ -34,7 +34,7 @@ export const useMailStore = create<MailStore>((set) => ({
   // Auth
   session: null,
   credentials: null,
-  serverUrl: "https://mail.lmcustoms.cc",
+  serverUrl: "",
   // Mail
   mailboxes: [],
   emails: [],

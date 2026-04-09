@@ -1,8 +1,8 @@
 # Wrapped — Claude Code Instructions
 
 ## Project
-Native macOS email client for lmcustoms.cc built with Tauri v2 + React + TypeScript.
-Uses JMAP protocol to communicate with Stalwart mail server at `mail.lmcustoms.cc`.
+Native macOS email client built with Tauri v2 + React + TypeScript.
+Uses JMAP protocol to communicate with any JMAP-compatible mail server (e.g. Stalwart).
 
 ## Commands
 ```bash
@@ -57,7 +57,7 @@ npm run lint         # ESLint
 ## JMAP Rules
 - All JMAP calls go through `src/services/jmap/client.ts` — never call `fetch` directly in components
 - Session stored in Zustand `mailStore` — always call `getPrimaryAccountId(session)` before use
-- Server: `https://mail.lmcustoms.cc` (configurable in store)
+- Server URL is user-configurable at login — no hardcoded default
 - Always batch method calls — use a single `call()` with multiple `methodCalls` when possible
 - Handle `JMAPClientError` — show user-facing error messages, never swallow errors
 

@@ -1,6 +1,6 @@
 # Wrapped
 
-A native macOS email client built with Tauri + React for [lmcustoms.cc](https://lmcustoms.cc).
+A native macOS email client built with Tauri + React, designed for use with any JMAP-compatible mail server.
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178c6?style=flat-square&logo=typescript)
 ![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react)
@@ -16,7 +16,7 @@ A native macOS email client built with Tauri + React for [lmcustoms.cc](https://
 | State | Zustand |
 | Styling | Tailwind CSS |
 | Protocol | JMAP (RFC 8620 + 8621) |
-| Mail server | Stalwart at `mail.lmcustoms.cc` |
+| Mail server | Any JMAP-compatible server (e.g. Stalwart) |
 
 ## Development
 
@@ -28,7 +28,7 @@ A native macOS email client built with Tauri + React for [lmcustoms.cc](https://
 ### Setup
 
 ```bash
-git clone https://github.com/LMCustoms/wrapped.git
+git clone https://github.com/your-org/wrapped.git
 cd wrapped
 npm install
 ```

@@ -13,14 +13,14 @@ Authorization: Basic <base64(username:password)>
 **Response: JMAPSession**
 ```json
 {
-  "username": "anian@lmcustoms.cc",
-  "apiUrl": "https://mail.lmcustoms.cc/jmap/",
-  "downloadUrl": "https://mail.lmcustoms.cc/jmap/download/{accountId}/{blobId}/{name}",
-  "uploadUrl": "https://mail.lmcustoms.cc/jmap/upload/{accountId}/",
-  "eventSourceUrl": "https://mail.lmcustoms.cc/jmap/eventsource/",
+  "username": "user@example.com",
+  "apiUrl": "https://mail.example.com/jmap/",
+  "downloadUrl": "https://mail.example.com/jmap/download/{accountId}/{blobId}/{name}",
+  "uploadUrl": "https://mail.example.com/jmap/upload/{accountId}/",
+  "eventSourceUrl": "https://mail.example.com/jmap/eventsource/",
   "accounts": {
     "account-id-here": {
-      "name": "anian@lmcustoms.cc",
+      "name": "user@example.com",
       "isPersonal": true,
       "isReadOnly": false,
       "accountCapabilities": { ... }
@@ -150,7 +150,7 @@ First create the Email object, then submit it:
       "accountId": "<id>",
       "create": {
         "draft": {
-          "from": [{ "email": "anian@lmcustoms.cc" }],
+          "from": [{ "email": "user@example.com" }],
           "to": [{ "email": "recipient@example.com" }],
           "subject": "Hello",
           "keywords": { "$draft": true },
@@ -166,7 +166,7 @@ First create the Email object, then submit it:
         "send": {
           "#emailId": { "resultOf": "createEmail", "name": "Email/set", "path": "/created/draft/id" },
           "envelope": {
-            "mailFrom": { "email": "anian@lmcustoms.cc" },
+            "mailFrom": { "email": "user@example.com" },
             "rcptTo": [{ "email": "recipient@example.com" }]
           }
         }
@@ -201,8 +201,8 @@ Never send over plain HTTP.
 | `stateMismatch` | Concurrent modification |
 
 ## Stalwart-Specific Notes
-- Server: `https://mail.lmcustoms.cc`
-- Well-known: `https://mail.lmcustoms.cc/.well-known/jmap`
+- Server: user-configurable at login (e.g. `https://mail.example.com`)
+- Well-known: `<serverUrl>/.well-known/jmap`
 - Stalwart implements JMAP Core + JMAP Mail fully
 - Also supports JMAP push via EventSource (`eventSourceUrl`) for real-time updates
 - Admin API is separate (not JMAP) at `/api/` — don't mix these

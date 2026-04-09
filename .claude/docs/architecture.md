@@ -8,7 +8,7 @@
 │  (w-56)     │  (w-72)          │      (flex-1)              │
 │             │                  │                            │
 │ 📥 Inbox    │ ● Subject line   │  From: sender@example.com  │
-│ 📤 Sent     │   Preview text   │  To: you@lmcustoms.cc      │
+│ 📤 Sent     │   Preview text   │  To: you@example.com      │
 │ 📝 Drafts   │   2h ago         │                            │
 │ 📦 Archive  │                  │  Email body rendered here  │
 │ 🗑 Trash    │ ○ Subject line   │  (DOMPurify sanitized HTML)│

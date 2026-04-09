@@ -59,7 +59,7 @@
 - `types.ts` — all TypeScript interfaces (JMAPSession, Mailbox, Email, etc.)
 - `client.ts` — `initSession()`, `call()`, `getFirstResponse()`
 - `session.ts` — session cache, `getPrimaryAccountId()`
-**Server:** `https://mail.lmcustoms.cc` (Stalwart)
+**Server:** User-configurable at login (tested with Stalwart)
 **Auth:** HTTP Basic over HTTPS
 
 ## DOMPurify
